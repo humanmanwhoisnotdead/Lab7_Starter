@@ -9,15 +9,15 @@ self.addEventListener('install', function (event) {
    * TODO - Part 2 Step 2
    * Create a function as outlined above
    */
-  var urlsToCache = ['/assets/scripts/main.js', '/assets/scripts/Router.js',
-   '/assets/components/RecipeCard.js','/assets/components/RecipeExpand.js',
-   '/assets/styles/main.css', '/index.html'];
-  //event.waitUntil(
+  var urlsToCache = ['https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/scripts/main.js', 'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/scripts/Router.js',
+   'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/components/RecipeCard.js','https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/components/RecipeExpand.js',
+   'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/styles/main.css', 'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/index.html'];
+  event.waitUntil(
   caches.open(CACHE_NAME)
     .then(function(cache) {
       return cache.addAll(urlsToCache);
     })
-  //);
+  );
 });
 
 /**
