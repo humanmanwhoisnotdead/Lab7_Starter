@@ -11,7 +11,7 @@ self.addEventListener('install', function (event) {
    */
   var urlsToCache = ['./assets/scripts/main.js', './assets/scripts/Router.js',
    './assets/components/RecipeCard.js','./assets/components/RecipeExpand.js',
-   './assets/styles/main.css'];
+   './assets/styles/main.css', '.index.html'];
   //event.waitUntil(
   caches.open(CACHE_NAME)
     .then(function(cache) {
