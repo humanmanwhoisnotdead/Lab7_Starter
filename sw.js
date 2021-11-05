@@ -9,6 +9,15 @@ self.addEventListener('install', function (event) {
    * TODO - Part 2 Step 2
    * Create a function as outlined above
    */
+  var urlsToCache = ['./assets/scripts/main.js', './assets/scripts/Router.js',
+   './assets/components/RecipeCard.js','./assets/components/RecipeExpand.js',
+   './assets/styles/main.css'];
+  //event.waitUntil(
+  caches.open(CACHE_NAME)
+    .then(function(cache) {
+      return cache.addAll(urlsToCache);
+    })
+  //);
 });
 
 /**
@@ -21,6 +30,7 @@ self.addEventListener('activate', function (event) {
    * TODO - Part 2 Step 3
    * Create a function as outlined above, it should be one line
    */
+  clients.claim();
 });
 
 // Intercept fetch requests and store them in the cache
@@ -29,4 +39,29 @@ self.addEventListener('fetch', function (event) {
    * TODO - Part 2 Step 4
    * Create a function as outlined above
    */
+  caches.match(event.request)
+    .then(function(response) {
+      if (response) {
+        return response;
+      }
+
+      return fetch(event.request).then(
+        function(response) {
+          // Check if we received a valid response
+          if(!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+
+          // Clone response
+          var responseToCache = response.clone();
+
+          caches.open(CACHE_NAME)
+            .then(function(cache) {
+              cache.put(event.request, responseToCache);
+            });
+
+          return response;
+        }
+      );
+    })
 });

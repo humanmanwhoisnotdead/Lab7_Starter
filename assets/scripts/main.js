@@ -1,7 +1,7 @@
 // main.js
 
-//import { Router } from './router.js';
-import { Router } from 'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/scripts/Router.js';
+import { Router } from './Router.js';
+//import { Router } from 'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab7_Starter/main/assets/scripts/Router.js';
 
 const recipes = [
   'https://introweb.tech/assets/json/ghostCookies.json',
@@ -26,7 +26,6 @@ const router = new Router(function () {
    * This will only be two single lines
    * If you did this right, you should see the recipe cards just like last lab
    */
-  console.log("X");
   document.querySelector('.section--recipe-cards').classList.add('shown');
   document.querySelector('.section--recipe-expand').classList.remove('shown');
 });
@@ -59,6 +58,14 @@ function initializeServiceWorker() {
    *  TODO - Part 2 Step 1
    *  Initialize the service worker set up in sw.js
    */
+   if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      }, function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
 }
 
 /**
@@ -235,7 +242,6 @@ function bindPopstate() {
    */
   window.addEventListener('popstate', e => {
     if (e.state != null) {
-      console.log('H');
       router.navigate(e.state, true)
     }
   });
