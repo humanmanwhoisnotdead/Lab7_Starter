@@ -1,6 +1,6 @@
 // main.js
 
-import { Router } from './router.js';
+import { Router } from 'https://raw.githubusercontent.com/humanmanwhoisnotdead/Lab6_Starter/main/assets/scripts/router.js';
 
 const recipes = [
   'https://introweb.tech/assets/json/ghostCookies.json',
